@@ -13,8 +13,11 @@ int main()
 {
   SDL::Window window(true);
   window.fillRect(255, 0, 0);
+
+  window.blitBMP("Images\\home.bmp");
+  
   //Wait two seconds
-  SDL::delay(2000);
+  SDL::delay(4000);
   SDL::quit();
 
   return 0;

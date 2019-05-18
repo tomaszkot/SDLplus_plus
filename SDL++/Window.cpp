@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Window.h"
 #include "Colors.h"
+#include "Surface.h"
 
 namespace SDL
 {
@@ -13,7 +14,7 @@ namespace SDL
     if (autoCreate)
       create();
   }
-  
+
   Window::~Window()
   {
     SDL_DestroyWindow(window);
@@ -34,10 +35,25 @@ namespace SDL
     fillRect(NULL, r, g, b);
   }
 
-  void Window::fillRect(const SDL_Rect * rect, Uint32 r, Uint32 g, Uint32 b)
+  void Window::fillRect(const SDL_Rect *rect, Uint32 r, Uint32 g, Uint32 b)
   {
     SDL_FillRect(screenSurface, rect, SDL::Colors::fromRGB(screenSurface->format, r, g, b));
 
     SDL_UpdateWindowSurface(window);
   }
+
+  void Window::blit(Surface *surface)
+  {
+    //Apply the image
+    SDL_BlitSurface(surface->get(), NULL, screenSurface, NULL);
+    SDL_UpdateWindowSurface(window);
+  }
+
+  void Window::blitBMP(std::string path)
+  {
+    Surface surface;
+    surface.loadBMP(path);
+    blit(&surface);
+  }
+
 }

@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SDL++Client", "SDL++Client\SDL++Client.vcxproj", "{C130A60C-4A16-4255-B558-6286B90E8469}"
+	ProjectSection(ProjectDependencies) = postProject
+		{AF55EB95-C06B-40FC-9743-D521F6DA4B6F} = {AF55EB95-C06B-40FC-9743-D521F6DA4B6F}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SDL++", "SDL++\SDL++.vcxproj", "{AF55EB95-C06B-40FC-9743-D521F6DA4B6F}"
 EndProject
