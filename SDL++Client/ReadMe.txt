@@ -1,8 +1,8 @@
 ========================================================================
-    DYNAMIC LINK LIBRARY : SDL++ Project Overview
+    CONSOLE APPLICATION : SDL++ Project Overview
 ========================================================================
 
-AppWizard has created this SDL++ DLL for you.
+AppWizard has created this SDL++ application for you.
 
 This file contains a summary of what you will find in each of the files that
 make up your SDL++ application.
@@ -22,7 +22,7 @@ SDL++.vcxproj.filters
     "Source Files" filter).
 
 SDL++.cpp
-    This is the main DLL source file.
+    This is the main application source file.
 
 /////////////////////////////////////////////////////////////////////////////
 Other standard files:

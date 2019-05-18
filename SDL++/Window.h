@@ -1,13 +1,14 @@
 #pragma once
+#include "SDL++.h"
+#include "Globals.h"
 #include <SDL.h>
 
 namespace SDL
 {
-  class Window
+  class SDL_API Window
   {
     SDL_Window* window = NULL;
 
-    //The surface contained by the window
     SDL_Surface* screenSurface = NULL;
 
   public:
