@@ -6,6 +6,7 @@
 //#include <SDL.h>
 #include <stdio.h>
 #include "../SDL++/Window.h"
+#include "../SDL++/Surface.h"
 
 #undef main
 
@@ -14,7 +15,8 @@ int main()
   SDL::Window window(true);
   window.fillRect(255, 0, 0);
 
-  window.blitBMP("Images\\home.bmp");
+  SDL::Surface surface("Images\\home.bmp");
+  window.blit(&surface);
   
   //Wait two seconds
   SDL::delay(4000);

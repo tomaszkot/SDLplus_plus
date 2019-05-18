@@ -3,8 +3,10 @@
 
 namespace SDL
 {
-  Surface::Surface()
+  Surface::Surface(std::string path /*= ""*/)
   {
+    if (!path.empty())
+      loadBMP(path);
   }
   
   Surface::~Surface()
@@ -17,7 +19,7 @@ namespace SDL
     surface = SDL_LoadBMP(path.c_str());
     if (surface == NULL)
     {
-      //printf("Unable to load image %s! SDL Error: %s\n", "02_getting_an_image_on_the_screen/hello_world.bmp", SDL_GetError());
+      printf("Unable to load image %s! SDL Error: %s\n", "02_getting_an_image_on_the_screen/hello_world.bmp", SDL_GetError());
     }
   }
 

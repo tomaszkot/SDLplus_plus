@@ -6,12 +6,12 @@
 
 namespace SDL
 {
-  class Surface
+  class SDL_API Surface
   {
     SDL_Surface * surface = NULL;
 
   public:
-    Surface();
+    Surface(std::string path = "");
     ~Surface();
 
     void loadBMP(std::string path);
