@@ -10,4 +10,5 @@ SDL::Window window(true);
 window.fillRect(255, 0, 0);
 
 //draw bitmap on it<br/>
-window.blitBMP("Images\\home.bmp");
+SDL::Surface surface("Images\\home.bmp");
+window.blit(&surface);
