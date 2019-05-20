@@ -19,7 +19,7 @@ int main()
   auto texture = window->loadBMP("Images\\home.bmp");
   window->render(texture);
 
-  window->renderAnimatedSprite("Images\\idle2.bmp", 0, texture->height());
+  window->render(SDL::createAnimatedSprite(window, "Images\\idle2.bmp", { 0, texture->height() }));
   
   //Wait two seconds
   SDL::delay(4000);

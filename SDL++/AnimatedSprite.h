@@ -16,7 +16,7 @@ namespace SDL
     SDL_Point m_position;
 
   public:
-    AnimatedSprite(std::unique_ptr<Texture>&& texture, SDL_Point* position = NULL);
+    AnimatedSprite(std::unique_ptr<Texture>&& texture, const SDL_Point position = {});
     ~AnimatedSprite();
 
     int frameSize() { return m_frameSize; }

@@ -24,12 +24,10 @@ namespace SDL
     void fillRect(const SDL_Rect *rect, Uint32 r, Uint32 g, Uint32 b);
     void fillRect(Uint32 r, Uint32 g, Uint32 b);
     void blit(Surface *surface);
-    void blitBMP(std::string path);
-    std::unique_ptr<Texture> loadBMP(std::string path);
+    void blitBMP(const std::string path);
+    std::unique_ptr<Texture> loadBMP(const std::string path);
     void render(std::unique_ptr<Texture>& texture, SDL_Rect* frame = NULL, int x = 0, int y = 0);
     void render(std::unique_ptr<AnimatedSprite>& sprite);
-    std::unique_ptr<AnimatedSprite> createAnimatedSprite(std::string texturePath, SDL_Point* position = NULL);
-    void renderAnimatedSprite(std::string texturePath, int x = 0, int y = 0);
   };
 }
 

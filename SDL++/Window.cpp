@@ -63,7 +63,7 @@ namespace SDL
     blit(&surface);
   }
 
-  std::unique_ptr<Texture> Window::loadBMP(std::string path)
+  std::unique_ptr<Texture> Window::loadBMP(const std::string path)
   {
     auto txt = std::make_unique<Texture>();
     txt->load(path, renderer);
@@ -74,12 +74,6 @@ namespace SDL
   void Window::render(std::unique_ptr<Texture>& texture, SDL_Rect* frame /*= NULL*/, int x /*= 0*/, int y/* = 0*/)
   {
     texture->render(x, y, frame, renderer);
-  }
-
-  void Window::renderAnimatedSprite(std::string texturePath, int x /*= 0*/, int y/* = 0*/)
-  {
-    auto as = createAnimatedSprite(texturePath, &SDL_Point{x, y});
-    render(as);
   }
 
   void Window::render(std::unique_ptr<AnimatedSprite>& sprite)
@@ -93,9 +87,5 @@ namespace SDL
     }
   }
 
-  std::unique_ptr<AnimatedSprite> Window::createAnimatedSprite(std::string texturePath, SDL_Point* position /*= NULL*/)
-  {
-    auto sprite = std::make_unique<AnimatedSprite>(loadBMP(texturePath), position);
-    return std::move(sprite);
-  }
+  
 }
