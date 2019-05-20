@@ -1,0 +1,8 @@
+﻿
+Renamed 'clip' to 'frame':
+--------------------------
+c:\Users\Koto\source\repos\SDLplus_plus\SDL++\Texture.cpp(32, 48)
+c:\Users\Koto\source\repos\SDLplus_plus\SDL++\Texture.cpp(37, 9)
+c:\Users\Koto\source\repos\SDLplus_plus\SDL++\Texture.cpp(39, 22)
+c:\Users\Koto\source\repos\SDLplus_plus\SDL++\Texture.cpp(40, 22)
+c:\Users\Koto\source\repos\SDLplus_plus\SDL++\Texture.cpp(44, 39)

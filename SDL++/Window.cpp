@@ -2,6 +2,7 @@
 #include "Window.h"
 #include "Colors.h"
 #include "Surface.h"
+#include "AnimatedSprite.h"
 
 namespace SDL
 {
@@ -18,6 +19,8 @@ namespace SDL
   Window::~Window()
   {
     SDL_DestroyWindow(window);
+    SDL_DestroyRenderer(renderer);
+    
   }
 
   void Window::create()
@@ -28,7 +31,10 @@ namespace SDL
       printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
     }
     else
+    {
       screenSurface = SDL_GetWindowSurface(window);
+      renderer = SDL_CreateRenderer(window, -1, 0);
+    }
   }
 
   void Window::fillRect(Uint32 r, Uint32 g, Uint32 b)
@@ -57,4 +63,39 @@ namespace SDL
     blit(&surface);
   }
 
+  std::unique_ptr<Texture> Window::loadBMP(std::string path)
+  {
+    auto txt = std::make_unique<Texture>();
+    txt->load(path, renderer);
+
+    return txt;
+  }
+
+  void Window::render(std::unique_ptr<Texture>& texture, SDL_Rect* frame /*= NULL*/, int x /*= 0*/, int y/* = 0*/)
+  {
+    texture->render(x, y, frame, renderer);
+  }
+
+  void Window::renderAnimatedSprite(std::string texturePath, int x /*= 0*/, int y/* = 0*/)
+  {
+    auto as = createAnimatedSprite(texturePath, &SDL_Point{x, y});
+    render(as);
+  }
+
+  void Window::render(std::unique_ptr<AnimatedSprite>& sprite)
+  {
+    auto frameSize = sprite->frameSize();
+    for (int i = 0; i < sprite->framesCount(); i++)
+    {
+      SDL_Rect frame{ i*frameSize, 0, frameSize, frameSize };
+      render(sprite->texture(), &frame, sprite->position().x, sprite->position().y);
+      SDL::delay(sprite->frameTime());
+    }
+  }
+
+  std::unique_ptr<AnimatedSprite> Window::createAnimatedSprite(std::string texturePath, SDL_Point* position /*= NULL*/)
+  {
+    auto sprite = std::make_unique<AnimatedSprite>(loadBMP(texturePath), position);
+    return std::move(sprite);
+  }
 }
