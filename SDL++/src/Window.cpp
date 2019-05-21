@@ -71,21 +71,17 @@ namespace SDL
     return txt;
   }
 
-  void Window::render(std::unique_ptr<Texture>& texture, SDL_Rect* frame /*= NULL*/, int x /*= 0*/, int y/* = 0*/)
+  void Window::render(std::unique_ptr<Texture>& texture, SDL_Rect* frame /*= NULL*/, 
+    int x /*= 0*/, int y/* = 0*/, double angle/* = 0*/)
   {
-    texture->render(x, y, frame, renderer);
+    texture->render(x, y, frame, renderer, angle);
   }
 
   void Window::render(std::unique_ptr<AnimatedSprite>& sprite)
   {
+    sprite->update();
     auto frameSize = sprite->frameSize();
-    for (int i = 0; i < sprite->framesCount(); i++)
-    {
-      SDL_Rect frame{ i*frameSize, 0, frameSize, frameSize };
-      render(sprite->texture(), &frame, sprite->position().x, sprite->position().y);
-      SDL::delay(sprite->frameTime());
-    }
+    SDL_Rect frame{ sprite->currentFrameIndex() *frameSize, 0, frameSize, frameSize };
+    render(sprite->texture(), &frame, sprite->position().x, sprite->position().y, sprite->angle());
   }
-
-  
 }

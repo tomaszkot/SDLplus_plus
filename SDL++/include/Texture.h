@@ -11,13 +11,14 @@ namespace SDL
     
     int w;
     int h;
+    
 
   public:
     Texture();
     ~Texture();
 
     void load(std::string path, SDL_Renderer *renderer);
-    void render(int x, int y, SDL_Rect* frame, SDL_Renderer *renderer);
+    void render(int x, int y, SDL_Rect* frame, SDL_Renderer *renderer, double angle = 0);
     void render(SDL_Renderer *renderer);
 
     SDL_Texture* get() 

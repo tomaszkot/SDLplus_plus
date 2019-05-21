@@ -29,7 +29,7 @@ namespace SDL
     render(0, 0, NULL, renderer);
   }
 
-  void Texture::render(int x, int y, SDL_Rect* frame, SDL_Renderer *renderer)
+  void Texture::render(int x, int y, SDL_Rect* frame, SDL_Renderer *renderer, double angle/* = 0*/)
   {
     SDL_Rect renderQuad = { x, y, w, h };
 
@@ -41,7 +41,8 @@ namespace SDL
     }
 
     //Render to screen
-    SDL_RenderCopy(renderer, texture, frame, &renderQuad);
+    //SDL_RenderCopy(renderer, texture, frame, &renderQuad);
+    SDL_RenderCopyEx(renderer, texture, frame, &renderQuad, angle, NULL, SDL_FLIP_NONE);
     //SDL_RenderCopy(renderer, texture, NULL, NULL);
     SDL_RenderPresent(renderer);
   }

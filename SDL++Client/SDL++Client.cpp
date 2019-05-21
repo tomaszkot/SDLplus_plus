@@ -19,7 +19,13 @@ int main()
   auto texture = window->loadBMP("Images\\home.bmp");
   window->render(texture);
 
-  window->render(SDL::createAnimatedSprite(window, "Images\\idle2.bmp", { 0, texture->height() }));
+  auto sprite = SDL::createAnimatedSprite(window, "Images\\idle2.bmp", { 0, texture->height() });
+  for (int i = 0; i < 360; i++)
+  {
+    sprite->setAngle(i);
+    window->render(sprite);
+    SDL::delay(10);
+  }
   
   //Wait two seconds
   SDL::delay(4000);
