@@ -4,10 +4,10 @@
 #include "stdafx.h"
 
 #include <stdio.h>
-#include "../SDL++/Window.h"
-#include "../SDL++/Surface.h"
-#include "../SDL++/Texture.h"
-#include "../SDL++/AnimatedSprite.h"
+#include <Window.h>
+#include <Surface.h>
+#include <Texture.h>
+#include <AnimatedSprite.h>
 
 #undef main
 
