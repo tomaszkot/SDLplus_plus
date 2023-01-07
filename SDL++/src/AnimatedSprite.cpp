@@ -15,6 +15,7 @@ namespace SDL
     m_position = position;
     m_angle = angle;
     frameStartTime = SDL_GetTicks();
+    
   }
   
   AnimatedSprite::~AnimatedSprite()
@@ -27,7 +28,7 @@ namespace SDL
     auto diff = now - frameStartTime;
     if (diff > m_frameTime)
     {
-      std::cout << "m_currentFrameIndex = " << m_currentFrameIndex << std::endl;
+      //std::cout << "m_currentFrameIndex = " << m_currentFrameIndex << std::endl;
       m_currentFrameIndex++;
       frameStartTime = now;
       if (m_currentFrameIndex >= m_framesCount)

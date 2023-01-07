@@ -75,10 +75,12 @@ namespace SDL
     int x /*= 0*/, int y/* = 0*/, double angle/* = 0*/)
   {
     texture->render(x, y, frame, renderer, angle);
+    //SDL_UpdateWindowSurface(window);
   }
 
   void Window::render(std::unique_ptr<AnimatedSprite>& sprite)
   {
+    SDL_RenderClear(renderer);
     sprite->update();
     auto frameSize = sprite->frameSize();
     SDL_Rect frame{ sprite->currentFrameIndex() *frameSize, 0, frameSize, frameSize };

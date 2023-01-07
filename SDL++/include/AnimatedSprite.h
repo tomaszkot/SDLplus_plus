@@ -27,6 +27,8 @@ namespace SDL
     int framesCount() { return m_framesCount; }
     int frameTime() { return m_frameTime; }
     SDL_Point position() { return m_position; }
+    void setPosition(SDL_Point& position) { m_position = position; };
+
     double angle() { return m_angle; }
     void setAngle(double angle) { m_angle = angle; };
     void update();

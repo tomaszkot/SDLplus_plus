@@ -149,6 +149,7 @@
     <ClInclude Include="include\Colors.h" />
     <ClInclude Include="include\SDL++.h" />
     <ClInclude Include="include\Globals.h" />
+    <ClInclude Include="include\Input.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="include\Surface.h" />
     <ClInclude Include="targetver.h" />
@@ -156,6 +157,7 @@
     <ClInclude Include="include\Window.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Input.cpp" />
     <ClCompile Include="src\AnimatedSprite.cpp" />
     <ClCompile Include="dllmain.cpp">
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
