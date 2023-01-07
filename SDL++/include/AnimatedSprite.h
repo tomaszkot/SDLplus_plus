@@ -1,6 +1,7 @@
 #pragma once
 #include <SDL++.h>
 #include <SDL.h>
+#include <memory>
 #include <string>
 
 namespace SDL
