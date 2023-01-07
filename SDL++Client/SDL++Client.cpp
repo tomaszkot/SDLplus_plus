@@ -16,8 +16,7 @@
 
 int main()
 {
-  
-  //OldMain();
+
   auto window = SDL::createWindow();
   auto sprite = SDL::createAnimatedSprite(window, "Images\\hero.bmp", { 0, 0 });
   
@@ -59,23 +58,4 @@ int main()
   return 0;
 }
 
-//void OldMain()
-//{
-//  auto window = SDL::createWindow();
-//
-//  auto texture = window->loadBMP("Images\\home.bmp");
-//  window->render(texture);
-//
-//  auto sprite = SDL::createAnimatedSprite(window, "Images\\idle2.bmp", { 0, texture->height() });
-//  for (int i = 0; i < 360; i++)
-//  {
-//    sprite->setAngle(i);
-//    window->render(sprite);
-//    SDL::delay(10);
-//  }
-//
-//  //Wait two seconds
-//  SDL::delay(4000);
-//  SDL::quit();
-//}
 
