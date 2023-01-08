@@ -15,6 +15,7 @@
 using namespace SDL;
 int width = 1920;// SDL::SCREEN_WIDTH;
 int height = 1080;
+const int spriteSize = 128;
 const int numTrees = 10;
 const int numEnemies = 4;
 //std::unique_ptr<Window> window;
@@ -28,11 +29,6 @@ void moveSprite(AnimatedSprite* sprite, int deltaX, int deltaY)
 	auto pos = sprite->position();
 	auto newX = pos.x + deltaX;
 	pos.x = newX;
-	//if (pos.x >1080)
-	//{
-//		break;
-	//}
-	//	pos.x = newX;
 
 	if (pos.x >= 1920)
 	{
@@ -53,8 +49,6 @@ void moveSprite(AnimatedSprite* sprite, int deltaX, int deltaY)
 	}
 	for (int i = 0; i < numTrees; i++)
 	{
-		//trees[i] = createTree(&window);
-		//trees[i] = SDL::createAnimatedSprite(window, "Images\\tree.bmp", { 128 *  dx,128* dy });
 		auto treePos=trees[i]->position();
 		if (treePos.x == pos.x && treePos.y==pos.y)
 		{
@@ -66,7 +60,7 @@ void moveSprite(AnimatedSprite* sprite, int deltaX, int deltaY)
 
 
 }
-std::unique_ptr<AnimatedSprite> createTree(std::unique_ptr<Window>* window)
+std::unique_ptr<AnimatedSprite> createSprite(std::unique_ptr<Window>* window,std::string spriteImage )
 {
 	int a = 3;
 	int ay = 1;
@@ -74,23 +68,13 @@ std::unique_ptr<AnimatedSprite> createTree(std::unique_ptr<Window>* window)
 	int bx = 15;
 	int dx = rand() % (bx - a) + a;
 	int dy = rand() % (by - a) + ay;
-	auto tree = SDL::createAnimatedSprite(*window, "Images\\tree.bmp", { 128 * dx,128 * dy });
-	return tree;
+	auto sprite = SDL::createAnimatedSprite(*window, spriteImage, { spriteSize * dx,spriteSize * dy });
+	return sprite;
 }
 
 
-std::unique_ptr<AnimatedSprite> createEnemy(std::unique_ptr<Window>* window)
-{
-	int a = 3;
-	int ay = 1;
-	int by = 10;
-	int bx = 15;
-	int dx = rand() % (bx - a) + a;
-	int dy = rand() % (by - a) + ay;
-	auto tree = SDL::createAnimatedSprite(*window, "Images\\bear.bmp", { 128 * dx,128 * dy });
-	return tree;
 
-}
+
 
 /// <summary>
 /// 
@@ -107,16 +91,16 @@ int main()
 	
 	for (int i = 0; i < numTrees; i++)
 	{
-		trees[i] = createTree(&window);
+		trees[i] = createSprite(&window,"Images\\tree.bmp");
 	}
 	for (int i = 0; i < numEnemies; i++)
 	{
-		enemies[i] = createEnemy(&window);
+		enemies[i] =createSprite(&window,"Images\\bear.bmp");
 	}
 	bool quit = false;
 	SDL::Input input;
 	bool redraw = true;
-	int speed = 128;
+	int speed = spriteSize;
 	while (!quit)
 	{
 		input.update();
