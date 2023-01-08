@@ -15,6 +15,11 @@
 using namespace SDL;
 int width = 1920;// SDL::SCREEN_WIDTH;
 int height = 1080;
+const int numTrees = 10;
+const int numEnemies = 4;
+//std::unique_ptr<Window> window;
+std::unique_ptr<AnimatedSprite> trees[numTrees];
+std::unique_ptr<AnimatedSprite> enemies[numEnemies];
 /// <summary>
 /// 
 /// </summary>
@@ -29,35 +34,66 @@ void moveSprite(AnimatedSprite* sprite, int deltaX, int deltaY)
 	//}
 	//	pos.x = newX;
 
-	if (pos.x > 1920)
+	if (pos.x >= 1920)
 	{
-		exit(0);
+		return;
 	}
 	else if (pos.x < 0)
 	{
-		exit(0);
+		return;
 	}
 	pos.y += deltaY;
 	if (pos.y > 1080)
 	{
-		exit(0);
+		return;
 	}
 	else if (pos.y < 0)
 	{
-		exit(0);
+		return;
 	}
+	for (int i = 0; i < numTrees; i++)
+	{
+		//trees[i] = createTree(&window);
+		//trees[i] = SDL::createAnimatedSprite(window, "Images\\tree.bmp", { 128 *  dx,128* dy });
+		auto treePos=trees[i]->position();
+		if (treePos.x == pos.x && treePos.y==pos.y)
+		{
+			return;
+		}
+	}
+
 	sprite->setPosition(pos);
 
 
 }
-std::unique_ptr<AnimatedSprite> createTree()
+std::unique_ptr<AnimatedSprite> createTree(std::unique_ptr<Window>* window)
 {
-	return 0;
+	int a = 3;
+	int ay = 1;
+	int by = 10;
+	int bx = 15;
+	int dx = rand() % (bx - a) + a;
+	int dy = rand() % (by - a) + ay;
+	auto tree = SDL::createAnimatedSprite(*window, "Images\\tree.bmp", { 128 * dx,128 * dy });
+	return tree;
 }
 
 
+std::unique_ptr<AnimatedSprite> createEnemy(std::unique_ptr<Window>* window)
+{
+	int a = 3;
+	int ay = 1;
+	int by = 10;
+	int bx = 15;
+	int dx = rand() % (bx - a) + a;
+	int dy = rand() % (by - a) + ay;
+	auto tree = SDL::createAnimatedSprite(*window, "Images\\bear.bmp", { 128 * dx,128 * dy });
+	return tree;
+
+}
 
 /// <summary>
+/// 
 /// 
 /// </summary>
 /// <returns></returns>
@@ -66,22 +102,17 @@ int main()
 
 	auto window = SDL::createWindow();
 	auto hero = SDL::createAnimatedSprite(window, "Images\\hero.bmp", { 0, 0 });
-	auto bear = SDL::createAnimatedSprite(window, "Images\\bear.bmp", { 128, 1 });
-	int t[10] = { 1,2 };
-	std::unique_ptr<AnimatedSprite> trees[10];
 	
-	for (int i = 0; i < 10; i++)
-	{
-		//int randomNumberX = rand();
-		int a = 3;
-		int ay = 1;
-		int by = 10;
-		int bx = 15;
-		int dx = rand() % (bx - a) + a;
-		int dy = rand() % (by - a) + ay;
-		trees[i] = SDL::createAnimatedSprite(window, "Images\\tree.bmp", { 128 *  dx,128* dy });
-	}
 
+	
+	for (int i = 0; i < numTrees; i++)
+	{
+		trees[i] = createTree(&window);
+	}
+	for (int i = 0; i < numEnemies; i++)
+	{
+		enemies[i] = createEnemy(&window);
+	}
 	bool quit = false;
 	SDL::Input input;
 	bool redraw = true;
@@ -116,15 +147,20 @@ int main()
 		{
 			window->clear();
 			window->render(hero);
-			window->render(bear);
-			for (int i = 0; i < 10; i++)
+			
+			for (int i = 0; i < numTrees; i++)
 			{
 				window->render(trees[i]);
 			}
-		}
+
+			for (int i = 0; i < numEnemies; i++)
+			{
+				window->render(enemies[i]);
+			}
+		}    
 		redraw = false;
 		SDL::delay(10);
-	}
+	}  
 
 	return 0;
 }
