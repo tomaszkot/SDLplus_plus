@@ -172,7 +172,12 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <Image Include="Images\bear.bmp" />
+    <Image Include="Images\hero.bmp" />
     <Image Include="Images\home.bmp" />
+    <Image Include="Images\idle2.bmp" />
+    <Image Include="Images\place_holder.bmp" />
+    <Image Include="Images\tree.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

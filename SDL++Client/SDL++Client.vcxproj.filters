@@ -40,5 +40,20 @@
     <Image Include="Images\home.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="Images\bear.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\hero.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\idle2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\place_holder.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\tree.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

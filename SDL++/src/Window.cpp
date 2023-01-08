@@ -7,8 +7,8 @@
 namespace SDL
 {
   //default screen dimension constants
-  const int SCREEN_WIDTH = 1200;
-  const int SCREEN_HEIGHT = 800;
+  const int SCREEN_WIDTH = 1920;
+  const int SCREEN_HEIGHT = 1080;
 
   Window::Window(bool autoCreate /*= false*/)
   {
@@ -35,6 +35,7 @@ namespace SDL
       screenSurface = SDL_GetWindowSurface(window);
       renderer = SDL_CreateRenderer(window, -1, 0);
     }
+        
   }
 
   void Window::fillRect(Uint32 r, Uint32 g, Uint32 b)
@@ -78,9 +79,14 @@ namespace SDL
     //SDL_UpdateWindowSurface(window);
   }
 
+  void Window::clear()
+  {
+      SDL_RenderClear(renderer);
+  }
+
   void Window::render(std::unique_ptr<AnimatedSprite>& sprite)
   {
-    SDL_RenderClear(renderer);
+    
     sprite->update();
     auto frameSize = sprite->frameSize();
     SDL_Rect frame{ sprite->currentFrameIndex() *frameSize, 0, frameSize, frameSize };
