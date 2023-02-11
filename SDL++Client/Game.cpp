@@ -133,35 +133,37 @@ bool isSpriteAtPosition(std::vector<std::unique_ptr<AnimatedSprite>>& sprites, S
 
 void Game::moveSprite(AnimatedSprite* sprite, int deltaX, int deltaY)
 {
-	auto pos = sprite->position();
-	auto newX = pos.x + deltaX;
-	pos.x = newX;
+	auto oldPos = sprite->position();
+	auto newPos = oldPos;
+	newPos.x += deltaX;
 
-	if (pos.x >= 1920)
+	if (newPos.x >= 1920)
 	{
 		return;
 	}
-	else if (pos.x < 0)
+	else if (newPos.x < 0)
 	{
 		return;
 	}
-	pos.y += deltaY;
-	if (pos.y > 1080)
+	newPos.y += deltaY;
+	if (newPos.y > 1080)
 	{
 		return;
 	}
-	else if (pos.y < 0)
+	else if (newPos.y < 0)
 	{
 		return;
 	}
-	if (isSpriteAtPosition(m_trees, pos))
+	if (isSpriteAtPosition(m_trees, newPos))
 	    return;
 	
-	if (isSpriteAtPosition(m_enemies, pos))
+	if (isSpriteAtPosition(m_enemies, newPos))
 		return;
+	//if ()
 	//1) jak jest enemy to dac return
-
-	sprite->setPosition(pos);
+	if (isPositionSame (m_hero->position(),  newPos))
+		return;
+	sprite->setPosition(newPos);
 }
 
 std::unique_ptr<AnimatedSprite> Game::createSprite(std::unique_ptr<Window>& window, std::string spriteImage)
