@@ -9,19 +9,22 @@ void Game::create(std::unique_ptr<Window>& window)
 	}
 	for (int i = 0; i < 4; i++)
 	{
-		enemies.push_back(createSprite(window, "Images\\bear.bmp"));
+		m_enemies.push_back(createSprite(window, "Images\\bear.bmp"));
 	}
-	hero = SDL::createAnimatedSprite(window, "Images\\hero.bmp", { 0, 0 });
+	m_hero = SDL::createAnimatedSprite(window, "Images\\hero.bmp", { 0, 0 });
 }
+
 
 void Game::render(std::unique_ptr<Window>& window)
 {
+	window->render(m_hero);
+
 	for (auto& i : m_trees)
 	{
 		window->render(i);
 	}
 
-	for (auto& i : enemies)
+	for (auto& i : m_enemies)
 	{
 		window->render(i);
 	}
@@ -33,28 +36,28 @@ void Game::run(std::unique_ptr<SDL::Window>& window)
 	bool quit = false;
 	SDL::Input input;
 	bool redraw = true;
-	int speed = spriteSize;
+	int speed = g_spriteSize;
 	while (!quit)
 	{
 		input.update();
 		if (input.isKeyDown(SDLK_LEFT))
 		{
-			moveSprite(hero.get(), -1 * speed, 0);
+			moveSprite(m_hero.get(), -1 * speed, 0);
 			redraw = true;
 		}
 		else if (input.isKeyDown(SDLK_RIGHT))
 		{
-			moveSprite(hero.get(), 1 * speed, 0);
+			moveSprite(m_hero.get(), 1 * speed, 0);
 			redraw = true;
 		}
 		else if (input.isKeyDown(SDLK_UP))
 		{
-			moveSprite(hero.get(), 0, -1 * speed);
+			moveSprite(m_hero.get(), 0, -1 * speed);
 			redraw = true;
 		}
 		else if (input.isKeyDown(SDLK_DOWN))
 		{
-			moveSprite(hero.get(), 0, 1 * speed);
+			moveSprite(m_hero.get(), 0, 1 * speed);
 			redraw = true;
 		}
 		else if (input.isKeyDown(SDLK_ESCAPE))
@@ -68,17 +71,30 @@ void Game::run(std::unique_ptr<SDL::Window>& window)
 		if (redraw)
 		{
 			window->clear();
-			window->render(hero);
-
-			//2
-			//drawSprites(trees, numTrees);
-			//drawSprites(enemies, numEnemies);
-
+			
 			render(window);
 		}
 		redraw = false;
 		SDL::delay(10);
 	}
+}
+
+bool isPositionSame(SDL_Point p1, SDL_Point p2)
+{
+	return p1.x == p2.x && p1.y == p2.y;
+}
+
+bool isSpriteAtPosition(std::vector<std::unique_ptr<AnimatedSprite>>& sprites, SDL_Point pos)
+{
+	for (int i = 0; i < sprites.size(); i++)
+	{
+		auto treePos = sprites[i]->position();
+		if (isPositionSame(treePos, pos))
+		{
+			return true;
+		}
+	}
+	return false;
 }
 
 void Game::moveSprite(AnimatedSprite* sprite, int deltaX, int deltaY)
@@ -104,24 +120,11 @@ void Game::moveSprite(AnimatedSprite* sprite, int deltaX, int deltaY)
 	{
 		return;
 	}
-	for (int i = 0; i < m_trees.size(); i++)
-	{
-		auto treePos = m_trees[i]->position();
-		if (treePos.x == pos.x && treePos.y == pos.y)
-		{
-			return;
-		}
-	}
-	for (int i = 0; i < enemies.size(); i++)
-	{
-		auto enemyPos = enemies[i]->position();
-		if (enemyPos.x == pos.x && enemyPos.y == pos.y)
-		{
-			return;
-		}
-
-
-	}
+	if (isSpriteAtPosition(m_trees, pos))
+	    return;
+	
+	if (isSpriteAtPosition(m_enemies, pos))
+		return;
 	//1) jak jest enemy to dac return
 
 	sprite->setPosition(pos);
@@ -135,6 +138,6 @@ std::unique_ptr<AnimatedSprite> Game::createSprite(std::unique_ptr<Window>& wind
 	int bx = 15;
 	int dx = rand() % (bx - a) + a;
 	int dy = rand() % (by - a) + ay;
-	auto sprite = SDL::createAnimatedSprite(window, spriteImage, { spriteSize * dx,spriteSize * dy });
+	auto sprite = SDL::createAnimatedSprite(window, spriteImage, { g_spriteSize * dx, g_spriteSize * dy });
 	return sprite;
 }

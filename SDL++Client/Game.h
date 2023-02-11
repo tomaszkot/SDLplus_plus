@@ -8,14 +8,14 @@
 #include "SDL++Client.h"
 #include <Input.h>
 using namespace SDL;
-const int spriteSize = 128;
+const int g_spriteSize = 128;
 
 class Game
 {
 private:
 	std::vector<std::unique_ptr<AnimatedSprite>> m_trees;
-	std::vector<std::unique_ptr<AnimatedSprite>> enemies;
-	std::unique_ptr<AnimatedSprite> hero;
+	std::vector<std::unique_ptr<AnimatedSprite>> m_enemies;
+	std::unique_ptr<AnimatedSprite> m_hero;
 
 	void create(std::unique_ptr<Window>& window);
 	/// <summary>
