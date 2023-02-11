@@ -8,7 +8,7 @@ namespace SDL
   {
   }
 
-  void Texture::load(std::string path, SDL_Renderer *renderer)
+  void Texture::load(const std::string& path, SDL_Renderer *renderer)
   {
     Surface surface;
     surface.loadBMP(path);

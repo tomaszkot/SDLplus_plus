@@ -3,7 +3,7 @@
 
 namespace SDL
 {
-  Surface::Surface(std::string path /*= ""*/)
+  Surface::Surface(const std::string& path /*= ""*/)
   {
     if (!path.empty())
       loadBMP(path);
@@ -14,7 +14,7 @@ namespace SDL
     SDL_FreeSurface(surface);
   }
 
-  void Surface::loadBMP(std::string path)
+  void Surface::loadBMP(const std::string& path)
   {
     surface = SDL_LoadBMP(path.c_str());
     if (surface == NULL)

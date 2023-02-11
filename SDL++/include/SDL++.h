@@ -9,14 +9,3 @@
 #else
 #define SDL_API __declspec(dllimport)
 #endif
-
-//// This class is exported from the SDL++.dll
-//class SDL_API CSDL {
-//public:
-//	CSDL(void);
-//	// TODO: add your methods here.
-//};
-//
-//extern SDL_API int nSDL;
-//
-//SDL_API int fnSDL(void);

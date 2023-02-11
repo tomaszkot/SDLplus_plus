@@ -12,9 +12,9 @@ namespace SDL
 
   class SDL_API Window
   {
-    SDL_Window *window = NULL;
-    SDL_Renderer *renderer = NULL;
-    SDL_Surface *screenSurface = NULL;
+    SDL_Window *window = nullptr;
+    SDL_Renderer *renderer = nullptr;
+    SDL_Surface *screenSurface = nullptr;
 
   public:
     Window(bool autoCreate = false);
@@ -23,11 +23,11 @@ namespace SDL
     void create();
     void fillRect(const SDL_Rect *rect, Uint32 r, Uint32 g, Uint32 b);
     void fillRect(Uint32 r, Uint32 g, Uint32 b);
-    void blit(Surface *surface);
-    void blitBMP(const std::string path);
-    std::unique_ptr<Texture> loadBMP(const std::string path);
-    void render(std::unique_ptr<Texture>& texture, SDL_Rect* frame = NULL, int x = 0, int y = 0, double angle = 0);
-    void render(std::unique_ptr<AnimatedSprite>& sprite);
+    void blit(const Surface *surface);
+    void blitBMP(const std::string& path);
+    std::unique_ptr<Texture> loadBMP(const std::string& path);
+    void render(const std::unique_ptr<Texture>& texture, SDL_Rect* frame = NULL, int x = 0, int y = 0, double angle = 0);
+    void render(const std::unique_ptr<AnimatedSprite>& sprite);
     void clear();
   };
 }

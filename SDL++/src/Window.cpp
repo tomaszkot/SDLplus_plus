@@ -50,21 +50,21 @@ namespace SDL
     SDL_UpdateWindowSurface(window);
   }
 
-  void Window::blit(Surface *surface)
+  void Window::blit(const Surface *surface)
   {
     //Apply the image
     SDL_BlitSurface(surface->get(), NULL, screenSurface, NULL);
     SDL_UpdateWindowSurface(window);
   }
 
-  void Window::blitBMP(std::string path)
+  void Window::blitBMP(const std::string& path)
   {
     Surface surface;
     surface.loadBMP(path);
     blit(&surface);
   }
 
-  std::unique_ptr<Texture> Window::loadBMP(const std::string path)
+  std::unique_ptr<Texture> Window::loadBMP(const std::string& path)
   {
     auto txt = std::make_unique<Texture>();
     txt->load(path, renderer);
@@ -72,7 +72,7 @@ namespace SDL
     return txt;
   }
 
-  void Window::render(std::unique_ptr<Texture>& texture, SDL_Rect* frame /*= NULL*/, 
+  void Window::render(const std::unique_ptr<Texture>& texture, SDL_Rect* frame /*= NULL*/,
     int x /*= 0*/, int y/* = 0*/, double angle/* = 0*/)
   {
     texture->render(x, y, frame, renderer, angle);
@@ -84,7 +84,7 @@ namespace SDL
       SDL_RenderClear(renderer);
   }
 
-  void Window::render(std::unique_ptr<AnimatedSprite>& sprite)
+  void Window::render(const std::unique_ptr<AnimatedSprite>& sprite)
   {
     
     sprite->update();

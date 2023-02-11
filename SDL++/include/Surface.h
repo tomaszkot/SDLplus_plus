@@ -8,13 +8,13 @@ namespace SDL
 {
   class SDL_API Surface
   {
-    SDL_Surface * surface = NULL;
+    SDL_Surface * surface = nullptr;
 
   public:
-    Surface(std::string path = "");
+    Surface(const std::string& path = "");
     ~Surface();
 
-    void loadBMP(std::string path);
-    SDL_Surface *get() { return surface; }
+    void loadBMP(const std::string& path);
+    SDL_Surface *get() const { return surface; }
   };
 }
