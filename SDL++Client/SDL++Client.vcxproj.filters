@@ -27,6 +27,9 @@
     <ClInclude Include="SDL++Client.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -35,9 +38,27 @@
     <ClCompile Include="SDL++Client.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Images\home.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\bear.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\hero.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\idle2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\place_holder.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\tree.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

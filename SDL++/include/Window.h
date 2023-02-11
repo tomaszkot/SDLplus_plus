@@ -28,6 +28,7 @@ namespace SDL
     std::unique_ptr<Texture> loadBMP(const std::string path);
     void render(std::unique_ptr<Texture>& texture, SDL_Rect* frame = NULL, int x = 0, int y = 0, double angle = 0);
     void render(std::unique_ptr<AnimatedSprite>& sprite);
+    void clear();
   };
 }
 
