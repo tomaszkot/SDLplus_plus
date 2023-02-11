@@ -33,9 +33,9 @@ public:
 			window->render(i);
 		}
 
-		for (int i = 0; i < enemies.size(); i++)
+		for (auto& i : enemies)
 		{
-			window->render(enemies[i]);
+			window->render(i);
 		}
 	}
 
@@ -71,6 +71,11 @@ public:
 			}
 			else if (input.isKeyDown(SDLK_ESCAPE))
 				quit = true;
+
+			//TODO 
+			// move functions to cpp file
+			// wrte short loop[s
+			//move enemies in a loop, rand by x=+/-1 or y=+-1
 
 			if (redraw)
 			{
@@ -122,7 +127,6 @@ public:
 			{
 				return;
 			}
-
 		}
 		for (int i = 0; i < enemies.size(); i++)
 		{
@@ -137,8 +141,6 @@ public:
 		//1) jak jest enemy to dac return
 
 		sprite->setPosition(pos);
-
-
 	}
 
 	/// <summary>
