@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Game.h"
-
+#include <random>
 void Game::create(std::unique_ptr<Window>& window)
 {
 	for (int i = 0; i < 10; i++)
@@ -28,6 +28,20 @@ void Game::render(std::unique_ptr<Window>& window)
 	{
 		window->render(i);
 	}
+}
+
+//template <typename Prob = double>
+bool generateRandomBool()
+{
+	/*auto dev = std::random_device();
+	auto gen = std::mt19937{ dev() };
+	auto dist = std::uniform_real_distribution<Prob>(0, 1);
+	return (dist(gen) < p);*/
+	/*auto gen = std::bind(std::uniform_int_distribution<>(0, 1), std::default_random_engine());
+	auto gerRes = gen();
+	return gerRes;*/
+	static const int shift = static_cast<int>(std::log2(RAND_MAX));
+	return (rand() >> shift) & 1;
 }
 
 void Game::run(std::unique_ptr<SDL::Window>& window)
@@ -64,15 +78,35 @@ void Game::run(std::unique_ptr<SDL::Window>& window)
 			quit = true;
 
 		//TODO 
-		// move functions to cpp file
-		// wrte short loop[s
 		//move enemies in a loop, rand by x=+/-1 or y=+-1
+		if (redraw)
+		{
+			for (auto& enemy : m_enemies)
+			{
+				int deltaX = 0;
+				int deltaY = 0;
+				bool changeX = generateRandomBool();
+				int  sign = 1;
+				if (generateRandomBool())
+					sign = -1;
+				if (changeX)
+				{
+					deltaX = sign  * speed;
+				}
+				else
+				{
+					deltaY = sign * speed;
+				}
+				moveSprite(enemy.get(), deltaX, deltaY);
+			}
+		}
+		
 
 		if (redraw)
 		{
 			window->clear();
 			
-			render(window);
+			this->render(window);
 		}
 		redraw = false;
 		SDL::delay(10);
